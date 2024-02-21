@@ -125,5 +125,4 @@ cart.addEventListener("click",function(event){
 function clearCart(){
     head.innerHTML=""
     head.style.display="none"
-    
 }
