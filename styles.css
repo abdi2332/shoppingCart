@@ -26,11 +26,23 @@ h1{
     border: 2px solid black;
 }
 #cart{
+    position: relative;
     box-sizing: border-box;
     background-color: aliceblue;
     margin: 10px 10px 10px;
-    height: 500px;
+    padding: 5px;
+    max-height: 700px;
     width: 200px;
+}
+#trash{
+    color: rgb(247, 104, 104);
+    position: absolute;
+    right: 180px;
+    top: 48px;
+    cursor: pointer;
+}
+#trash:hover{
+   color: red;
 }
 #cart > h2{
     padding: 5px;
@@ -52,4 +64,7 @@ h1{
 }
 #btn:hover{
     background-color: rgb(240, 141, 11);
+}
+#heading{
+    display: none;
 }
