@@ -62,6 +62,7 @@ products.forEach((product,index)=>{
     </div>`
 })
 let sum=0
+let tax=2.16;
 let total=0;
 let allCart=[]
 desertCart.addEventListener("click",(e)=>{
@@ -70,8 +71,8 @@ desertCart.addEventListener("click",(e)=>{
         const productIndex=parseInt(e.target.dataset.index)
         const{name,id,price,category}=products[productIndex]
         head.style.display="block"
-
-
+        sum+=price
+       
         const findItem=allCart.find(item=>item.id===id)
         if(findItem){
           findItem.quantity++
@@ -90,7 +91,7 @@ desertCart.addEventListener("click",(e)=>{
 
         })
         
-        cart.innerHTML=cartItemHTML
+        cart.innerHTML=`${cartItemHTML}<h5>Sum:${(sum).toFixed(2)} $</h5><h5>Tax:${(tax).toFixed(2)} $</h5><h5>total:${(tax+sum).toFixed(2)} $</h5>`
 
     }
 })
