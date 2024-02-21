@@ -53,6 +53,13 @@ const products = [
   }
 ];
 
+let sum=0
+let tax=2.16;
+let total=0;
+let allCart=[]
+
+
+
 products.forEach((product,index)=>{
     const {name,id,price,category}=product
     desertCart.innerHTML += `<div class="desert-style"><h2>${name}</h2>
@@ -61,12 +68,9 @@ products.forEach((product,index)=>{
     <button id="btn" data-index="${index}">addTocart</button>
     </div>`
 })
-let sum=0
-let tax=2.16;
-let total=0;
-let allCart=[]
+
+
 desertCart.addEventListener("click",(e)=>{
-    
     if(e.target.tagName ==='BUTTON'){
         const productIndex=parseInt(e.target.dataset.index)
         const{name,id,price,category}=products[productIndex]
@@ -82,21 +86,43 @@ desertCart.addEventListener("click",(e)=>{
           allCart.push({name,id,price,quantity:1})
           total+=price
         }
-       let cartItemHTML=''
-        allCart.forEach(item=>{
-          cartItemHTML += `<div class="cart-style"><h4>${item.quantity} ${item.name}</h4>
-          <h5>${item.price}</h5>
-          <h5>totalPrice:${((item.price*item.quantity)).toFixed(2)}</h5>
-      </div>`
-
-        })
-        
-        cart.innerHTML=`${cartItemHTML}<h5>Sum:${(sum).toFixed(2)} $</h5><h5>Tax:${(tax).toFixed(2)} $</h5><h5>total:${(tax+sum).toFixed(2)} $</h5>`
-
+        updateCart()
     }
 })
 
+
+function updateCart(){
+let cartItemHTML=''
+allCart.forEach(item=>{
+  cartItemHTML += `<div id="cart-style"><h4>${item.quantity} ${item.name}</h4>
+  <h5>${item.price}</h5>
+  <h5>totalPrice:${((item.price*item.quantity)).toFixed(2)}</h5>
+  <i class="fa fa-trash" id="trash" data-item-id="${item.id}"></i>
+</div>`
+
+})   
+cart.innerHTML=`${cartItemHTML}<h5>Sum:${(sum).toFixed(2)} $</h5><h5>Tax:${(tax).toFixed(2)} $</h5><h5>total:${(tax+sum).toFixed(2)} $</h5>`
+
+}
+
+
+
+
+cart.addEventListener("click",function(event){
+    if(event.target.classList.contains("fa-trash")){
+     const itemId=parseInt(event.target.dataset.itemId)
+     const itemIndex=allCart.findIndex(item=>item.id===itemId)
+     if(itemIndex!==-1){
+        const item=allCart[itemIndex]
+        total-=item.price*item.quantity
+        sum-=item.price*item.quantity
+        allCart.splice(itemIndex,1)
+        updateCart();
+     }
+    } 
+})
+
 function clearCart(){
-  cart.innerHTML=""
-  head.style.display="none"
+    head.innerHTML=""
+    head.style.display="none"
 }
