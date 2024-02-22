@@ -12,7 +12,7 @@ h1{
     text-align: center;
     color: rgb(12, 12, 116);
 }
-.container{
+#container{
     display: flex;
     justify-content: space-around;
 }

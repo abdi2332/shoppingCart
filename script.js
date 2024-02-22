@@ -2,6 +2,7 @@ const desertCart=document.getElementById("desert")
 const btn=document.getElementById("btn")
 const cart=document.getElementById("cart")
 const head=document.getElementById("heading")
+const container=document.getElementById("container")
 const products = [
   {
     id: 1,
@@ -102,7 +103,6 @@ allCart.forEach(item=>{
 
 })   
 cart.innerHTML=`${cartItemHTML}<h5>Sum:${(sum).toFixed(2)} $</h5><h5>Tax:${(tax).toFixed(2)} $</h5><h5>total:${(tax+sum).toFixed(2)} $</h5>`
-
 }
 
 
@@ -118,6 +118,7 @@ cart.addEventListener("click",function(event){
         sum-=item.price*item.quantity
         allCart.splice(itemIndex,1)
         updateCart();
+       
      }
     } 
 })
